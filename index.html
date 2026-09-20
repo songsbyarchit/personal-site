@@ -72,12 +72,9 @@ nav .links a:hover{color:var(--rust);}
 .scroll-tempter.hide{opacity:0!important;}
 .scroll-tempter span{position:absolute;left:50%;top:-50%;width:16px;height:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(181,90,58,.55) 0%,rgba(181,90,58,0) 72%);filter:blur(2px);animation:tempterFall 2.6s ease-in-out infinite;}
 @keyframes tempterFall{0%{top:-50%;opacity:0;}20%{opacity:1;}80%{opacity:1;}100%{top:100%;opacity:0;}}
-.orb-coin{position:absolute;right:3%;top:50%;transform:translateY(-50%);width:min(34vw,420px);aspect-ratio:1;z-index:1;perspective:1800px;cursor:pointer;}
+.orb-coin{position:absolute;right:3%;top:50%;transform:translateY(-50%);width:min(34vw,420px);aspect-ratio:1;z-index:1;perspective:1800px;}
 .orb-ring{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
-.orb-coin-inner{position:absolute;top:12.5%;left:12.5%;width:75%;height:75%;transform-style:preserve-3d;transform:rotateY(0deg);transition:transform 1.05s cubic-bezier(.65,0,.35,1);}
-.orb-coin:hover .orb-coin-inner{transform:scale(1.03);}
-.orb-coin.flipped .orb-coin-inner{transform:rotateY(180deg);}
-.orb-coin.flipped:hover .orb-coin-inner{transform:rotateY(180deg) scale(1.03);}
+.orb-coin-inner{position:absolute;top:12.5%;left:12.5%;width:75%;height:75%;transform-style:preserve-3d;transform:rotateY(0deg);}
 .orb-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:50%;overflow:hidden;}
 .orb-face.orb-back{transform:rotateY(180deg);background:#231f1b;box-shadow:0 20px 60px rgba(35,31,27,.4);}
 .orb-face.orb-back img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -263,7 +260,7 @@ footer .links a.primary:hover{background:var(--ink);border-color:var(--ink);tran
 <!-- HERO -->
 <header class="hero">
   <svg class="contours" id="contours" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
-  <div class="orb-coin" id="orbCoin" role="button" tabindex="0" aria-label="Flip to see a photo">
+  <div class="orb-coin" id="orbCoin" aria-hidden="true">
     <svg class="orb-ring" viewBox="0 0 400 400" aria-hidden="true">
       <g class="spin" fill="none" stroke="#231f1b" stroke-width="1" opacity=".5">
         <circle cx="200" cy="200" r="180" stroke-dasharray="2 8"/>
@@ -405,12 +402,12 @@ footer .links a.primary:hover{background:var(--ink);border-color:var(--ink);tran
     <div class="htrack" style="position:relative">
       <div class="tile t-time"><div class="logo">Babolat</div><div class="shot"><img src="images/babolat.jpg" alt="Level 2 Certificate in Coaching Badminton"></div><div><div class="yr">2019</div><h4>Badminton coach</h4><p>Training plans and tournament travel with international players.</p></div></div>
       <div class="tile t-time"><div class="logo">Cisco</div><div class="shot"><img src="images/cisco.jpg" alt="Cisco logo"></div><div><div class="yr serif">BSc</div><h4>Degree apprentice</h4><p>First Class in Digital Technology Solutions. CCNA along the way.</p></div></div>
-      <div class="tile t-time dark"><div class="logo">Speakademy</div><div class="shot"><!-- drop in: <img src="images/speakademy.jpg" alt=""> --><span>images/speakademy.jpg</span></div><div><div class="yr">2023</div><h4>Storytelling consultant</h4><p>Still running, still learning from every client.</p></div></div>
+      <div class="tile t-time dark"><div class="logo">Speakademy</div><div class="shot"><img src="images/speakademy.jpg" alt="Speakademy YouTube videos on storytelling"></div><div><div class="yr">2023</div><h4>Storytelling consultant</h4><p>Still running, still learning from every client.</p></div></div>
       <div class="tile t-time"><div class="logo">TEDx</div><div class="shot"><img src="images/tedx.jpg" alt="Archit Sachdeva on the TEDx stage at University of Łódź"></div><div><div class="yr serif">Łódź</div><h4>Speaker</h4><p>Booked the stage myself, from a DM.</p></div></div>
       <div class="tile t-time"><div class="logo">Webex</div><div class="shot"><img src="images/webex.jpg" alt="Webex logo"></div><div><div class="yr">2024</div><h4>Technical marketing engineer</h4><p>Video guides that made a product easier to explain and sell.</p></div></div>
       <div class="tile t-time"><div class="logo">Cisco Meraki</div><div class="shot"><img src="images/cisco-meraki.jpg" alt="Meraki social video tiles for UK schools"></div><div><div class="yr">2025</div><h4>Solutions engineer</h4><p>Demos and sizing for schools across the UK and Ireland.</p></div></div>
       <div class="tile t-time dark"><div class="logo">Grafana Labs</div><div class="shot"><img src="images/grafana-labs.jpg" alt="Grafana logo"></div><div><div class="yr">2025</div><h4>Observability advocate</h4><p>SRE and DevOps teams across the UK, Ireland and South Africa.</p></div></div>
-      <div class="tile t-time" style="border-style:dashed;background:transparent"><div class="logo">Next</div><div class="shot"><!-- drop in: <img src="images/next.jpg" alt=""> --><span>images/next.jpg</span></div><div><div class="yr">?</div><h4>Still iterating.</h4><p>Started messy. Getting less so.</p></div></div>
+      <div class="tile t-time" style="border-style:dashed;background:transparent"><div class="logo">Next</div><div class="shot"><img src="images/next.gif" alt="Loading, still iterating"></div><div><div class="yr">?</div><h4>Still iterating.</h4><p>Started messy. Getting less so.</p></div></div>
     </div>
   </div>
 </section>
@@ -561,36 +558,21 @@ const roles=["Technical storyteller","Observability advocate","TEDx speaker","Fo
 let ri=0;
 $('#dot').addEventListener('click',()=>{ri=(ri+1)%roles.length;const r=$('#role');r.style.opacity=0;setTimeout(()=>{r.textContent=roles[ri];r.style.opacity=1},180);});
 
-/* orb coin flip — playful, flips back on its own if you don't */
+/* orb coin flip — scrubbed directly by scroll position, slight ease-in acceleration */
 (function(){
   const coin=$('#orbCoin'),inner=$('#orbCoinInner');
   if(!coin||!inner)return;
-  let flipTimer=null;
-  function setFlipped(state){
-    if(coin.classList.contains('flipped')===state)return;
-    coin.classList.toggle('flipped',state);
-    coin.classList.add('flipping');
-    clearTimeout(flipTimer);
-    const onEnd=()=>{coin.classList.remove('flipping');inner.removeEventListener('transitionend',onEnd);};
-    inner.addEventListener('transitionend',onEnd);
-    if(reduce)coin.classList.remove('flipping');
-    if(state){
-      const delay=reduce?0:3800+Math.random()*3200;
-      flipTimer=setTimeout(()=>setFlipped(false),delay);
-    }
+  const FLIP_DISTANCE=560;
+  function update(){
+    const t=Math.min(1,Math.max(0,window.scrollY/FLIP_DISTANCE));
+    const eased=reduce?t:1-Math.cos((t*Math.PI)/2);
+    const angle=eased*180;
+    inner.style.transform=`rotateY(${angle}deg)`;
+    coin.classList.toggle('flipping',angle>60&&angle<120);
   }
-  coin.addEventListener('click',()=>setFlipped(!coin.classList.contains('flipped')));
-  coin.addEventListener('keydown',e=>{
-    if(e.key==='Enter'||e.key===' '){e.preventDefault();setFlipped(!coin.classList.contains('flipped'));}
-  });
-  /* the first little bit of scroll gives it a nudge, chanchal-style */
-  let scrollNudged=false;
-  window.addEventListener('scroll',()=>{
-    if(!scrollNudged&&window.scrollY>24){
-      scrollNudged=true;
-      setFlipped(true);
-    }
-  },{passive:true});
+  update();
+  window.addEventListener('scroll',update,{passive:true});
+  window.addEventListener('resize',update);
 })();
 
 /* scroll tempter — a soft downward glow that nudges you to scroll */
