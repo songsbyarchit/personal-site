@@ -54,7 +54,8 @@ nav .links a{text-decoration:none;}
 nav .links a:hover{color:var(--rust);}
 
 /* hero */
-.hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;}
+.hero-pin{position:relative;}
+.hero{height:100vh;position:sticky;top:0;display:flex;align-items:center;overflow:hidden;}
 .hero .contours{position:absolute;inset:-10%;width:120%;height:120%;opacity:.55;will-change:transform;}
 .hero .inner{position:relative;z-index:2;width:100%;}
 .hero h1{font-family:'Fraunces',serif;font-weight:300;font-size:clamp(3.4rem,11vw,10rem);line-height:.92;margin:14px 0 26px;letter-spacing:-.03em;}
@@ -258,6 +259,7 @@ footer .links a.primary:hover{background:var(--ink);border-color:var(--ink);tran
 </nav>
 
 <!-- HERO -->
+<div class="hero-pin" id="heroPin">
 <header class="hero">
   <svg class="contours" id="contours" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
   <div class="orb-coin" id="orbCoin" aria-hidden="true">
@@ -290,6 +292,7 @@ footer .links a.primary:hover{background:var(--ink);border-color:var(--ink);tran
   <div class="scrollhint mono"><span class="line"></span>Thanks for coming. Scroll.</div>
   <div class="scroll-tempter" id="scrollTempter" aria-hidden="true"><span></span></div>
 </header>
+</div>
 
 <div class="marquee" aria-hidden="true"><div class="row" id="marq"></div></div>
 
@@ -551,6 +554,7 @@ footer .links a.primary:hover{background:var(--ink);border-color:var(--ink);tran
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ORB_FLIP_DISTANCE=300;
 $('#yr').textContent=new Date().getFullYear();
 
 /* role cycle (egg) */
@@ -562,9 +566,8 @@ $('#dot').addEventListener('click',()=>{ri=(ri+1)%roles.length;const r=$('#role'
 (function(){
   const coin=$('#orbCoin'),inner=$('#orbCoinInner');
   if(!coin||!inner)return;
-  const FLIP_DISTANCE=90;
   function update(){
-    const t=Math.min(1,Math.max(0,window.scrollY/FLIP_DISTANCE));
+    const t=Math.min(1,Math.max(0,window.scrollY/ORB_FLIP_DISTANCE));
     const eased=reduce?t:1-Math.cos((t*Math.PI)/2);
     const angle=eased*180;
     inner.style.transform=`rotateY(${angle}deg)`;
@@ -687,11 +690,13 @@ $$('.rv,[data-count]').forEach(el=>io.observe(el));
 
 /* pinned horizontal sections */
 const pins=$$('.hpin').map(sec=>({sec,track:sec.querySelector('.htrack'),bar:sec.querySelector('.bar i'),dist:0}));
+const heroPin=$('#heroPin');
 function size(){
   pins.forEach(p=>{
     p.dist=Math.max(0,p.track.scrollWidth-window.innerWidth);
     p.sec.style.height=(p.dist+window.innerHeight)+'px';
   });
+  if(heroPin)heroPin.style.height=(reduce?0:ORB_FLIP_DISTANCE)+window.innerHeight+'px';
 }
 const scribble=$('#scribble');
 function onScroll(){
