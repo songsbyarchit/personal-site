@@ -562,7 +562,7 @@ $('#dot').addEventListener('click',()=>{ri=(ri+1)%roles.length;const r=$('#role'
 (function(){
   const coin=$('#orbCoin'),inner=$('#orbCoinInner');
   if(!coin||!inner)return;
-  const FLIP_DISTANCE=560;
+  const FLIP_DISTANCE=90;
   function update(){
     const t=Math.min(1,Math.max(0,window.scrollY/FLIP_DISTANCE));
     const eased=reduce?t:1-Math.cos((t*Math.PI)/2);
