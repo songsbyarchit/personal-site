@@ -41,7 +41,7 @@ a{color:inherit;}
 ::selection{background:var(--rust-soft);}
 
 /* progress */
-#progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--rust);z-index:90;}
+#progress{position:fixed;top:0;left:0;height:6px;width:0;background:var(--rust);z-index:90;transition:background-color .6s ease;}
 
 /* nav */
 nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;justify-content:space-between;align-items:center;padding:14px 28px;background:rgba(246,240,228,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
@@ -763,10 +763,15 @@ function size(){
   });
   if(heroPin)heroPin.style.height=(reduce?0:ORB_FLIP_DISTANCE)+window.innerHeight+'px';
 }
+/* progress bar deepens a shade with each section you reach */
+const progSecs=$$('#heroPin,#threads,#tedx,.numbers,#path,#builds,.habits,#hello');
+const progShade=i=>`hsl(15 51% ${47-i*3}%)`;
 const scribble=$('#scribble');
 function onScroll(){
   const y=window.scrollY,h=document.documentElement.scrollHeight-innerHeight;
   $('#progress').style.width=(y/h*100)+'%';
+  let si=0;progSecs.forEach((el,i)=>{if(el.getBoundingClientRect().top<=innerHeight*.5)si=i;});
+  $('#progress').style.backgroundColor=progShade(si);
   $('#contours').style.transform=`translateY(${y*.25}px)`;
   pins.forEach(p=>{
     const top=p.sec.getBoundingClientRect().top;
