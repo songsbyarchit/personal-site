@@ -247,6 +247,17 @@ footer .links a.primary:hover{background:var(--ink);border-color:var(--ink);tran
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;}
 }
+.t-build .helps{margin:10px 0 0;font-size:1rem;line-height:1.35;font-style:italic}
+.t-build .how{margin-top:10px}
+.t-build .how summary{cursor:pointer;font-family:'Space Grotesk',sans-serif;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--rust);list-style:none;display:inline-flex;gap:6px;align-items:center;padding:6px 0;min-height:32px}
+.t-build .how summary::-webkit-details-marker{display:none}
+.t-build .how summary::after{content:"+";font-size:1rem;transition:transform .2s}
+.t-build .how[open] summary::after{content:"\2212"}
+.t-build .how summary:focus-visible{outline:2px solid var(--rust);outline-offset:3px;border-radius:4px}
+.t-build .how .tag{margin:4px 0 0}
+.hello-row{padding-bottom:32px}
+.t-build .art{transition:opacity .2s}
+.t-build:has(.how[open]) .art{opacity:.12}
 </style>
 </head>
 <body>
@@ -439,7 +450,8 @@ footer .links a.primary:hover{background:var(--ink);border-color:var(--ink);tran
         <div class="mono">01 · MicroLearn</div>
         <div>
           <h3>A WhatsApp bot that teaches you slowly.</h3>
-          <p class="tag">Delay engine, knowledge graph, quiz mode, daily PDF reports.</p>
+          <p class="helps">Helps curious people learn a topic bit by bit, instead of one long chatbot answer.</p>
+          <details class="how"><summary>How it works</summary><p class="tag">Delay engine, knowledge graph, quiz mode, daily PDF reports. Replies arrive spread across the day.</p></details>
           <div class="stack"><span>FastAPI</span><span>Supabase</span><span>Redis</span><span>Twilio</span><span>ElevenLabs</span><span>Railway</span></div>
           <a class="gh" href="https://github.com/songsbyarchit/microlearn" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
@@ -459,7 +471,8 @@ footer .links a.primary:hover{background:var(--ink);border-color:var(--ink);tran
         <div class="mono">02 · Tenably</div>
         <div>
           <h3>Flat hunting, minus the WhatsApp chaos.</h3>
-          <p class="tag">A spare room in London means dozens of numbers and no idea who is who. This keeps track of which viewing is where.</p>
+          <p class="helps">Helps renters book viewings that fit their calendar, instead of juggling landlord chats.</p>
+          <details class="how"><summary>How it works</summary><p class="tag">A spare room in London means dozens of numbers and no idea who is who. It checks your calendar and commute for free 30-minute slots, then sends you a tentative invite to accept.</p></details>
           <div class="stack"><span>WhatsApp</span><span>AI agent</span><span>Viewings</span></div>
           <a class="gh" href="https://github.com/songsbyarchit/tenably-whatsapp" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
@@ -475,7 +488,7 @@ footer .links a.primary:hover{background:var(--ink);border-color:var(--ink);tran
         <div class="mono">03 · Reflectify</div>
         <div>
           <h3>Finding the note you half remember.</h3>
-          <p class="tag">Semantic retrieval over your own writing, using embeddings.</p>
+          <details class="how"><summary>How it works</summary><p class="tag">Semantic retrieval over your own writing, using embeddings.</p></details>
           <div class="stack"><span>OpenAI embeddings</span><span>Vector search</span><span>Python</span></div>
           <a class="gh" href="https://github.com/songsbyarchit/reflective-exp" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
@@ -528,14 +541,6 @@ footer .links a.primary:hover{background:var(--ink);border-color:var(--ink);tran
     <div class="mono" style="color:var(--rust)">Thanks for coming by</div>
     <div class="hello-row">
       <p class="big">Say <em>hello.</em><br>Ask me anything <span class="clover" id="clover">🍀<span class="tip">AMA. I mean it.</span></span></p>
-      <!-- LOOM: swap the div below for your embed, keeping the classes:
-           <div class="loom circle"><iframe src="https://www.loom.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe></div> -->
-      <div class="loom circle loom-ph rv">
-        <div>
-          <div class="mono" style="color:var(--rust)">Loom</div>
-          <p>A short hello,<br>coming soon.</p>
-        </div>
-      </div>
     </div>
     <div class="cols">
       <div class="links">
@@ -723,3 +728,4 @@ size();onScroll();
 </script>
 </body>
 </html>
+
